@@ -1,34 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Title - Utility-web
 
-## Getting Started
+##### Why the title?
 
-First, run the development server:
+Because it is a utility web application
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+##### What does it do?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I am not sure yet but I believe it wil be a small project that would contain the following:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[x] A full-fledged notes application. This is already being worked on and is already available to use. It uses the tinymce editor. I actually really like the editor.
+[] A calculator. This calculator will be multifunctional. Nothing has been decided yet.
+[] An up to date currency converter. Probably would use a library to do that. 
+[] A chat application. Also not done yet but it will be cool to understand web sockets. That technology has been very difficult for me to wrap my head around.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+##### Why am I doing this?
 
-To learn more about Next.js, take a look at the following resources:
+Most, if not all of my projects have been failures. Either I don't know enough to continue working on them or I lose the motivation to continue on the project. 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Also, this is my second time writing an expressive readme. I hope it is expressive enough
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+##### Technologies used?
 
-## Deploy on Vercel
+* Next.js App Router 
+* Tailwind css
+* tinymce
+* radix ui
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+
