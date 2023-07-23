@@ -25,10 +25,10 @@ Also, this is my second time writing an expressive readme. I hope it is expressi
 
 ##### Technologies used?
 
-* Next.js App Router 
-* Tailwind css
-* tinymce
-* radix ui
+* [Next.js App Router](https://nextjs.org/docs/app)
+* [Tailwind css](https://tailwindcss.com/)
+* [tinymce](https://www.tiny.cloud/)
+* [radix-ui](https://www.radix-ui.com/)
 
 
 
