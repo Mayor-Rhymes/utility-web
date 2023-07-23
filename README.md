@@ -9,8 +9,11 @@ Because it is a utility web application
 I am not sure yet but I believe it wil be a small project that would contain the following:
 
 [x] A full-fledged notes application. This is already being worked on and is already available to use. It uses the tinymce editor. I actually really like the editor.
+
 [] A calculator. This calculator will be multifunctional. Nothing has been decided yet.
+
 [] An up to date currency converter. Probably would use a library to do that. 
+
 [] A chat application. Also not done yet but it will be cool to understand web sockets. That technology has been very difficult for me to wrap my head around.
 
 
