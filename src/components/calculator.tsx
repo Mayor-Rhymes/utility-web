@@ -2,11 +2,26 @@
 
 import { BsFillBackspaceFill } from "react-icons/bs";
 import { MdClear } from "react-icons/md";
-import {TbSquareRoot2} from 'react-icons/tb'
+import { TbSquareRoot2 } from "react-icons/tb";
 import { useState } from "react";
 import { evaluate, pi, isPositive, abs, log, factorial, e, sqrt } from "mathjs";
+import CalcButton from './calculatorbutton';
 
 export default function Calculator() {
+  const buttons = [
+    7,
+    8,
+    9,
+    "*",
+    4,
+    5,
+    6,
+    "-",
+    1,
+    2,
+    3,
+    "/",
+  ];
   const [screenValue, setScreenValue] = useState("0");
   // const [operationValue, setOperationValue] = useState('');
   const screenClassname =
@@ -26,24 +41,20 @@ export default function Calculator() {
     }
   };
 
-  const handleNumber = (value: number | string) => {
+
+  const handleButtons = (value: number | string) => {
     if (screenValue.length !== 28) {
       if (typeof value === "number") {
         const numberToString = value.toString();
-        setScreenValue((prevState) =>
-          Number(prevState) === 0 ? numberToString : prevState + numberToString
-        );
-      } else {
-        setScreenValue((prevState) =>
-          Number(prevState) === 0 ? value : prevState + value
-        );
-      }
-    }
-  };
 
-  const handleSign = (value: string) => {
-    if (screenValue.length !== 28) {
-      setScreenValue(screenValue + value);
+        setScreenValue((prevState) =>
+          Number(prevState) === 0 && prevState !== "0."
+            ? numberToString
+            : prevState + numberToString
+        );
+      } else if (typeof value === "string" || value === ".") {
+        setScreenValue(screenValue + value);
+      }
     }
   };
 
@@ -82,16 +93,13 @@ export default function Calculator() {
   };
 
   const handleSqrt = () => {
-      
     setScreenValue(sqrt(screenValue));
-    
-  }
+  };
 
   const handleEquals = () => {
     const result = evaluate(screenValue);
     setScreenValue(result);
   };
-
 
   return (
     <div className="flex flex-col space-y-2">
@@ -106,12 +114,12 @@ export default function Calculator() {
       </div>
 
       <div className="grid grid-cols-4 gap-3">
-        <div
+        <button
           onClick={clearScreen}
           className="text-center bg-red-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center col-span-2 shadow-md"
         >
           <MdClear />
-        </div>
+        </button>
         <div
           onClick={handlePi}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
@@ -124,78 +132,11 @@ export default function Calculator() {
         >
           <BsFillBackspaceFill />
         </div>
-        <div
-          onClick={() => handleNumber(7)}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-        >
-          7
-        </div>
-        <div
-          onClick={() => handleNumber(8)}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-        >
-          8
-        </div>
-        <div
-          onClick={() => handleNumber(9)}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-        >
-          9
-        </div>
-        <div
-          onClick={() => handleSign("*")}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-        >
-          x
-        </div>
-        <div
-          onClick={() => handleNumber(4)}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-        >
-          4
-        </div>
-        <div
-          onClick={() => handleNumber(5)}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-        >
-          5
-        </div>
-        <div
-          onClick={() => handleNumber(6)}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-        >
-          6
-        </div>
-        <div
-          onClick={() => handleSign("-")}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-        >
-          -
-        </div>
-        <div
-          onClick={() => handleNumber(1)}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-        >
-          1
-        </div>
-        <div
-          onClick={() => handleNumber(2)}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-        >
-          2
-        </div>
-        <div
-          onClick={() => handleNumber(3)}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-        >
-          3
-        </div>
-        <div
-          onClick={() => handleSign("/")}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-        >
-          /
-        </div>
+        {buttons.map(button => 
+            
+            <CalcButton key={button} onClick={handleButtons}>{button}</CalcButton>
+            
+        )}
         <div
           onClick={handleSignInversion}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
@@ -203,28 +144,31 @@ export default function Calculator() {
           +/-
         </div>
         <div
-          onClick={() => handleNumber(0)}
+          onClick={() => handleButtons(0)}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           0
         </div>
         <div
-          onClick={() => handleNumber(".")}
+          onClick={() => handleButtons(".")}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           .
         </div>
         <div
-          onClick={() => handleSign("+")}
+          onClick={() => handleButtons("+")}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           +
         </div>
-        <div onClick={handlePercent} className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md">
+        <div
+          onClick={handlePercent}
+          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+        >
           %
         </div>
         <div
-          onClick={() => handleSign("^")}
+          onClick={() => handleButtons("^")}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           ^
