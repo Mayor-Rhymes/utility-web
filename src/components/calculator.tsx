@@ -1,4 +1,5 @@
-
+import {BsFillBackspaceFill} from 'react-icons/bs'
+import {MdClear} from 'react-icons/md'
 
 export default function Calculator() {
 
@@ -10,9 +11,9 @@ export default function Calculator() {
             </div>
 
             <div className="grid grid-cols-4 gap-3">
-                <div className="text-center bg-red-100 rounded-md px-3 py-3 col-span-2 shadow-md">C</div>
+                <div className="text-center bg-red-100 flex items-center justify-center rounded-md px-3 py-3 col-span-2 shadow-md"><MdClear /></div>
                 <div className="text-center bg-slate-100 rounded-md px-3 py-3 shadow-md">pi</div>
-                <div className="text-center bg-slate-100 rounded-md px-3 py-3 shadow-md">bs</div>
+                <div className="text-center flex items-center justify-center bg-slate-100 rounded-md px-3 py-3 shadow-md"><BsFillBackspaceFill /></div>
                 <div className="text-center bg-slate-100 rounded-md px-3 py-3 shadow-md">7</div>
                 <div className="text-center bg-slate-100 rounded-md px-3 py-3 shadow-md">8</div>
                 <div className="text-center bg-slate-100 rounded-md px-3 py-3 shadow-md">9</div>
