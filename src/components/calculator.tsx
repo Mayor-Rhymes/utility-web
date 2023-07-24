@@ -120,90 +120,90 @@ export default function Calculator() {
         >
           <MdClear />
         </button>
-        <div
+        <button
           onClick={handlePi}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           Pi
-        </div>
-        <div
+        </button>
+        <button
           onClick={handleBackspace}
           className="text-center flex items-center active:shadow-sm active:text-sm px-3 py-3 justify-center bg-slate-100 rounded-md shadow-md"
         >
           <BsFillBackspaceFill />
-        </div>
+        </button>
         {buttons.map(button => 
             
             <CalcButton key={button} onClick={handleButtons}>{button}</CalcButton>
             
         )}
-        <div
+        <button
           onClick={handleSignInversion}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           +/-
-        </div>
-        <div
+        </button>
+        <button
           onClick={() => handleButtons(0)}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           0
-        </div>
-        <div
+        </button>
+        <button
           onClick={() => handleButtons(".")}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           .
-        </div>
-        <div
+        </button>
+        <button
           onClick={() => handleButtons("+")}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           +
-        </div>
-        <div
+        </button>
+        <button
           onClick={handlePercent}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           %
-        </div>
-        <div
+        </button>
+        <button
           onClick={() => handleButtons("^")}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           ^
-        </div>
+        </button>
 
-        <div
+        <button
           onClick={handleFactorial}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           !
-        </div>
-        <div
+        </button>
+        <button
           onClick={handleLog}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           log
-        </div>
-        <div
+        </button>
+        <button
           onClick={handleLogToE}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           ln
-        </div>
-        <div
+        </button>
+        <button
           onClick={handleSqrt}
           className="text-center bg-blue-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           <TbSquareRoot2 />
-        </div>
-        <div
+        </button>
+        <button
           onClick={handleEquals}
           className="text-center bg-green-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md col-span-2"
         >
           =
-        </div>
+        </button>
       </div>
     </div>
   );

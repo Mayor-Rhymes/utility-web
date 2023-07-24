@@ -8,11 +8,11 @@ interface Props {
 
 export default function CalcButton({children, onClick}: Props) {
   return (
-    <div
+    <button
       onClick={() => onClick(children)}
       className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
     >
       {children}
-    </div>
+    </button>
   );
 }
