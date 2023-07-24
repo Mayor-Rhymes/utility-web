@@ -49,7 +49,7 @@ export default function Calculator() {
 
   const handlePi = () => {
     if (screenValue.length !== 28) {
-      setScreenValue(pi);
+      setScreenValue(pi.toString());
     }
   };
 
