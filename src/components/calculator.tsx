@@ -23,18 +23,18 @@ import {
 } from "mathjs";
 import CalcButton from "./calculatorbutton";
 
-enum CalculatorMode {
-  Standard,
-  Scientific,
-}
+const CalculatorMode = {
+  Standard: "Standard",
+  Scientific: "Scientific",
+};
+
+const MAX_SCREEN_WIDTH = 28;
 
 export default function Calculator() {
   const buttons = [7, 8, 9, "*", 4, 5, 6, "-", 1, 2, 3, "/"];
-  const trigs = ["sin", "cos", "tan", "asin"];
+  const trigFunctions = ["sin", "cos", "tan", "asin"];
   const [screenValue, setScreenValue] = useState("0");
-  const [calculatorMode, setCalculatorMode] = useState<CalculatorMode>(
-    CalculatorMode[0]
-  );
+  const [calculatorMode, setCalculatorMode] = useState(CalculatorMode.Standard);
   const screenClassname =
     "h-[100px] mt-5 max-w-[300px] flex justify-end items-center pr-2 font-bold text-lg bg-white shadow-md rounded-md";
   const screenClassnameNumIncrease =
@@ -53,7 +53,7 @@ export default function Calculator() {
   };
 
   const handleButtons = (value: number | string) => {
-    if (screenValue.length !== 28) {
+    if (screenValue.length !== MAX_SCREEN_WIDTH) {
       if (typeof value === "number") {
         const numberToString = value.toString();
 
@@ -69,13 +69,13 @@ export default function Calculator() {
   };
 
   const handlePi = () => {
-    if (screenValue.length !== 28) {
+    if (screenValue.length !== MAX_SCREEN_WIDTH) {
       setScreenValue(pi.toString());
     }
   };
 
   const handleSignInversion = () => {
-    if (screenValue.length !== 28) {
+    if (screenValue.length !== MAX_SCREEN_WIDTH) {
       const valueToNumber = Number(screenValue);
       if (isPositive(valueToNumber)) {
         setScreenValue("-" + screenValue);
@@ -102,7 +102,7 @@ export default function Calculator() {
     setScreenValue(factorial(screenValue));
   };
 
-  const handleTrig = (value: string) => {
+  const calculateTrigValue = (value: string) => {
     switch (value) {
       case "sin":
         setScreenValue(sin(unit(Number(screenValue), "deg")).toString());
@@ -143,17 +143,21 @@ export default function Calculator() {
     <div className="flex flex-col space-y-2">
       <div className="flex space-x-4">
         <button
-          onClick={() => setCalculatorMode(CalculatorMode[0])}
+          onClick={() => setCalculatorMode(CalculatorMode.Standard)}
           className={`active:bg-blue-200 p-3 transition-all ${
-            calculatorMode === CalculatorMode[0] ? "bg-blue-200" : "bg-white"
+            calculatorMode === CalculatorMode.Standard
+              ? "bg-blue-200"
+              : "bg-white"
           }`}
         >
           Standard
         </button>
         <button
-          onClick={() => setCalculatorMode(CalculatorMode[1])}
+          onClick={() => setCalculatorMode(CalculatorMode.Scientific)}
           className={`active:bg-blue-200 p-3 transition-all ${
-            calculatorMode === CalculatorMode[1] ? "bg-blue-200" : "bg-white"
+            calculatorMode === CalculatorMode.Scientific
+              ? "bg-blue-200"
+              : "bg-white"
           }`}
         >
           Scientific
@@ -189,7 +193,7 @@ export default function Calculator() {
           <BsFillBackspaceFill />
         </button>
         {buttons.map((button) => (
-          <CalcButton key={button} onClick={handleButtons}>
+          <CalcButton key={button} onClick={handleButtons} label={button}>
             {button}
           </CalcButton>
         ))}
@@ -248,10 +252,10 @@ export default function Calculator() {
         >
           ln
         </button>
-        {calculatorMode === CalculatorMode[1] && (
+        {calculatorMode === CalculatorMode.Scientific && (
           <>
-            {trigs.map((trig) => (
-              <CalcButton key={trig} onClick={handleTrig}>
+            {trigFunctions.map((trig) => (
+              <CalcButton key={trig} onClick={calculateTrigValue} label={trig}>
                 {trig}
               </CalcButton>
             ))}
