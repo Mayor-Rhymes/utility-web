@@ -10,7 +10,7 @@ I am not sure yet but I believe it wil be a small project that would contain the
 
 - [x] A full-fledged notes application. This is already being worked on and is already available to use. It uses the tinymce editor. I actually really like the editor.
 
-- [ ] A calculator. This calculator will be multifunctional. Nothing has been decided yet.
+- [x] A calculator. This calculator has been integrated. Although it is limited in functionality, it does a good job. It uses math.js.
 
 - [ ] An up to date currency converter. Probably would use a library to do that. 
 
