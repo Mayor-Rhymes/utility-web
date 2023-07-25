@@ -19,6 +19,7 @@ import {
   unit,
   ceil,
   round,
+  asin,
 } from "mathjs";
 import CalcButton from "./calculatorbutton";
 
@@ -29,6 +30,7 @@ enum CalculatorMode {
 
 export default function Calculator() {
   const buttons = [7, 8, 9, "*", 4, 5, 6, "-", 1, 2, 3, "/"];
+  const trigs = ["sin", "cos", "tan", "asin"];
   const [screenValue, setScreenValue] = useState("0");
   const [calculatorMode, setCalculatorMode] = useState<CalculatorMode>(
     CalculatorMode[0]
@@ -100,14 +102,24 @@ export default function Calculator() {
     setScreenValue(factorial(screenValue));
   };
 
-  const handleSin = () => {
-    setScreenValue(sin(unit(Number(screenValue), "deg")).toString());
-  };
-  const handleCos = () => {
-    setScreenValue(cos(unit(Number(screenValue), "deg")).toString());
-  };
-  const handleTan = () => {
-    setScreenValue(tan(unit(Number(screenValue), "deg")).toString());
+  const handleTrig = (value: string) => {
+    switch (value) {
+      case "sin":
+        setScreenValue(sin(unit(Number(screenValue), "deg")).toString());
+        break;
+
+      case "cos":
+        setScreenValue(cos(unit(Number(screenValue), "deg")).toString());
+        break;
+
+      case "tan":
+        setScreenValue(tan(unit(Number(screenValue), "deg")).toString());
+        break;
+
+      case "asin":
+        setScreenValue(asin(unit(Number(screenValue), "deg")).toString());
+        break;
+    }
   };
 
   const handleSqrt = () => {
@@ -238,30 +250,11 @@ export default function Calculator() {
         </button>
         {calculatorMode === CalculatorMode[1] && (
           <>
-            <button
-              onClick={handleSin}
-              className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-            >
-              sin
-            </button>
-            <button
-              onClick={handleCos}
-              className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-            >
-              cos
-            </button>
-            <button
-              onClick={handleTan}
-              className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-            >
-              tan
-            </button>
-            <button
-              onClick={handleLogToE}
-              className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
-            >
-              arcsin
-            </button>
+            {trigs.map((trig) => (
+              <CalcButton key={trig} onClick={handleTrig}>
+                {trig}
+              </CalcButton>
+            ))}
           </>
         )}
 
