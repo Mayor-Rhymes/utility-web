@@ -4,26 +4,35 @@ import { BsFillBackspaceFill } from "react-icons/bs";
 import { MdClear } from "react-icons/md";
 import { TbSquareRoot2 } from "react-icons/tb";
 import { useState } from "react";
-import { evaluate, pi, isPositive, abs, log, factorial, e, sqrt } from "mathjs";
-import CalcButton from './calculatorbutton';
+import {
+  evaluate,
+  pi,
+  isPositive,
+  abs,
+  log,
+  factorial,
+  e,
+  sqrt,
+  sin,
+  cos,
+  tan,
+  unit,
+  ceil,
+  round,
+} from "mathjs";
+import CalcButton from "./calculatorbutton";
+
+enum CalculatorMode {
+  Standard,
+  Scientific,
+}
 
 export default function Calculator() {
-  const buttons = [
-    7,
-    8,
-    9,
-    "*",
-    4,
-    5,
-    6,
-    "-",
-    1,
-    2,
-    3,
-    "/",
-  ];
+  const buttons = [7, 8, 9, "*", 4, 5, 6, "-", 1, 2, 3, "/"];
   const [screenValue, setScreenValue] = useState("0");
-  // const [operationValue, setOperationValue] = useState('');
+  const [calculatorMode, setCalculatorMode] = useState<CalculatorMode>(
+    CalculatorMode[0]
+  );
   const screenClassname =
     "h-[100px] mt-5 max-w-[300px] flex justify-end items-center pr-2 font-bold text-lg bg-white shadow-md rounded-md";
   const screenClassnameNumIncrease =
@@ -40,7 +49,6 @@ export default function Calculator() {
       setScreenValue((prevState) => prevState.slice(0, prevState.length - 1));
     }
   };
-
 
   const handleButtons = (value: number | string) => {
     if (screenValue.length !== 28) {
@@ -70,7 +78,7 @@ export default function Calculator() {
       if (isPositive(valueToNumber)) {
         setScreenValue("-" + screenValue);
       } else {
-        setScreenValue(abs(valueToNumber));
+        setScreenValue(abs(valueToNumber).toString());
       }
     }
   };
@@ -92,17 +100,53 @@ export default function Calculator() {
     setScreenValue(factorial(screenValue));
   };
 
+  const handleSin = () => {
+    setScreenValue(sin(unit(Number(screenValue), "deg")).toString());
+  };
+  const handleCos = () => {
+    setScreenValue(cos(unit(Number(screenValue), "deg")).toString());
+  };
+  const handleTan = () => {
+    setScreenValue(tan(unit(Number(screenValue), "deg")).toString());
+  };
+
   const handleSqrt = () => {
     setScreenValue(sqrt(screenValue));
   };
 
   const handleEquals = () => {
-    const result = evaluate(screenValue);
-    setScreenValue(result);
+    if (
+      screenValue.includes("*") ||
+      screenValue.includes("+") ||
+      screenValue.includes("-") ||
+      screenValue.includes("/") ||
+      screenValue.includes("^")
+    ) {
+      const result = evaluate(screenValue);
+      setScreenValue(result);
+    }
   };
 
   return (
     <div className="flex flex-col space-y-2">
+      <div className="flex space-x-4">
+        <button
+          onClick={() => setCalculatorMode(CalculatorMode[0])}
+          className={`active:bg-blue-200 p-3 transition-all ${
+            calculatorMode === CalculatorMode[0] ? "bg-blue-200" : "bg-white"
+          }`}
+        >
+          Standard
+        </button>
+        <button
+          onClick={() => setCalculatorMode(CalculatorMode[1])}
+          className={`active:bg-blue-200 p-3 transition-all ${
+            calculatorMode === CalculatorMode[1] ? "bg-blue-200" : "bg-white"
+          }`}
+        >
+          Scientific
+        </button>
+      </div>
       <div
         className={
           screenValue.length >= 22
@@ -113,7 +157,7 @@ export default function Calculator() {
         {screenValue}
       </div>
 
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-4 gap-2 transition-all">
         <button
           onClick={clearScreen}
           className="text-center bg-red-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center col-span-2 shadow-md"
@@ -132,11 +176,11 @@ export default function Calculator() {
         >
           <BsFillBackspaceFill />
         </button>
-        {buttons.map(button => 
-            
-            <CalcButton key={button} onClick={handleButtons}>{button}</CalcButton>
-            
-        )}
+        {buttons.map((button) => (
+          <CalcButton key={button} onClick={handleButtons}>
+            {button}
+          </CalcButton>
+        ))}
         <button
           onClick={handleSignInversion}
           className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
@@ -192,6 +236,35 @@ export default function Calculator() {
         >
           ln
         </button>
+        {calculatorMode === CalculatorMode[1] && (
+          <>
+            <button
+              onClick={handleSin}
+              className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+            >
+              sin
+            </button>
+            <button
+              onClick={handleCos}
+              className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+            >
+              cos
+            </button>
+            <button
+              onClick={handleTan}
+              className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+            >
+              tan
+            </button>
+            <button
+              onClick={handleLogToE}
+              className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+            >
+              arcsin
+            </button>
+          </>
+        )}
+
         <button
           onClick={handleSqrt}
           className="text-center bg-blue-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
