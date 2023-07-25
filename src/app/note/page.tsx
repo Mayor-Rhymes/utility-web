@@ -17,7 +17,7 @@ export default async function Note() {
 
   return (
     <div className="flex flex-col space-y-6">
-      <p className="text-center text-2xl">This is the note section</p>
+      <h3 className="text-center text-xl">This is the note section</h3>
 
       <NoteCanvas />
     </div>
