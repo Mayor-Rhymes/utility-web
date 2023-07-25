@@ -49,6 +49,9 @@ export default function Converter() {
   const [from, setFrom] = useState("NGN");
   const [to, setTo] = useState("USD");
   const [result, setResult] = useState(0);
+  const [isClicked, setIsClicked] = useState(false);
+
+  console.log(isClicked);
 
   return (
     <div className="max-w-[70%] py-5 lg:h-[400px] px-5 rounded-xl flex flex-col mt-4 space-y-4 justify-center shadow-2xl mx-auto">
@@ -57,8 +60,17 @@ export default function Converter() {
           <label htmlFor="amount">Amount</label>
           <input
             value={amount}
-            onChange={(event) => setAmount(event.target.value)}
-            type="text"
+            onChange={async (event) => {
+              if (isClicked) {
+                
+                setAmount(event.target.value);
+                await handleConversion();
+                
+              }
+
+              setAmount(event.target.value);
+            }}
+            type="number"
             name="amount"
             className="h-[50px] outline-none border-slate-300 rounded-md border-2 p-3"
           />
@@ -67,9 +79,17 @@ export default function Converter() {
           <label htmlFor="from">From</label>
           <select
             name="from"
-            className="p-3 h-[50px] outline-none border-slate-300 rounded-md border-2"
-            onChange={(event) => setFrom(event.target.value)}
             value={from}
+            className="p-3 h-[50px] outline-none border-slate-300 rounded-md border-2"
+            onChange={async (event) => {
+              if (isClicked) {
+                
+                setFrom(event.target.value);
+                await handleConversion();
+                
+              }
+              setFrom(event.target.value);
+            }}
           >
             {data?.currencies.map((datum) => (
               <option key={datum.iso} value={datum.iso}>
@@ -82,9 +102,18 @@ export default function Converter() {
           <label htmlFor="to">To</label>
           <select
             name="to"
-            className="p-3 h-[50px] outline-none border-slate-300 rounded-md border-2"
-            onChange={(event) => setTo(event.target.value)}
             value={to}
+            className="p-3 h-[50px] outline-none border-slate-300 rounded-md border-2"
+            onChange={async (event) => {
+              if (isClicked) {
+                
+                setTo(event.target.value);
+                await handleConversion();
+                
+              }
+
+              setTo(event.target.value);
+            }}
           >
             {data?.currencies.map((datum) => (
               <option key={datum.iso} value={datum.iso}>
@@ -95,7 +124,14 @@ export default function Converter() {
         </div>
       </div>
       <button
-        onClick={handleConversion}
+        onClick={async () => {
+          if (!isClicked) {
+            setIsClicked(true);
+            await handleConversion();
+          } else {
+            await handleConversion();
+          }
+        }}
         className="bg-blue-700 text-white self-end px-3 py-3 rounded-lg active:shadow-md"
       >
         Convert
@@ -105,9 +141,7 @@ export default function Converter() {
         <h3>
           {from} <span className="text-2xl font-semibold">{amount}</span> is
           equal to {to}{" "}
-          <span className="text-2xl font-semibold">
-            {result.toFixed(3).toLocaleString()}
-          </span>
+          <span className="text-2xl font-semibold">{result.toFixed(3)}</span>
         </h3>
       )}
     </div>
