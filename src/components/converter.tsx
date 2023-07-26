@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import useSWR from "swr";
+import { ToastContainer, toast } from "react-toastify";
 
 const URL = process.env.NEXT_PUBLIC_URL;
 
@@ -9,33 +10,39 @@ const encodedCredentials = btoa(
   `${process.env.NEXT_PUBLIC_USERNAME}:${process.env.NEXT_PUBLIC_PASSWORD}`
 );
 
+const fetcher = async (url) => {
+  const request = await fetch(`${url}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Basic ${encodedCredentials}`,
+    },
+  });
+
+  const data = await request.json();
+  return data;
+};
+
 export default function Converter() {
-  const fetcher = async (url) => {
-    const request = await fetch(`${url}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${encodedCredentials}`,
-      },
-    });
-
-    const data = await request.json();
-    return data;
-  };
-
   const handleConversion = async () => {
     if (amount && from && to) {
       try {
         const result = await fetcher(
-          `https://xecdapi.xe.com/v1/convert_from/?from=${from}&to=${to}&amount=${amount}`
+          `${URL}/v1/convert_from/?from=${from}&to=${to}&amount=${amount}`
         );
 
         if (result) {
           setResult(result.to[0].mid);
         } else {
-          console.log("Error");
+          toast.error("The api is malfunctioning", {
+            theme: "light",
+            closeOnClick: true,
+          });
         }
       } catch (err) {
-        console.log("Error");
+        toast.error("The api is malfunctioning", {
+          theme: "light",
+          closeOnClick: true,
+        });
       }
     }
   };
@@ -51,8 +58,6 @@ export default function Converter() {
   const [result, setResult] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
 
-  console.log(isClicked);
-
   return (
     <div className="max-w-[70%] py-5 lg:h-[400px] px-5 rounded-xl flex flex-col mt-4 space-y-4 justify-center shadow-2xl mx-auto">
       <div className="flex flex-col lg:grid lg:grid-cols-3 gap-3 place-content-center">
@@ -62,18 +67,27 @@ export default function Converter() {
             value={amount}
             onChange={async (event) => {
               if (isClicked) {
-                
-                setAmount(event.target.value);
-                await handleConversion();
-                
+                if (amount <= 0) {
+                  setAmount(1);
+                  await handleConversion();
+                } else {
+                  setAmount(event.target.value);
+                  await handleConversion();
+                }
               }
 
               setAmount(event.target.value);
             }}
             type="number"
             name="amount"
+            min={1}
             className="h-[50px] outline-none border-slate-300 rounded-md border-2 p-3"
           />
+          {amount < 1 && (
+            <p className="text-sm text-red-500">
+              Please enter a value greater than 0
+            </p>
+          )}
         </div>
         <div className="flex flex-col space-y-3">
           <label htmlFor="from">From</label>
@@ -83,10 +97,8 @@ export default function Converter() {
             className="p-3 h-[50px] outline-none border-slate-300 rounded-md border-2"
             onChange={async (event) => {
               if (isClicked) {
-                
                 setFrom(event.target.value);
                 await handleConversion();
-                
               }
               setFrom(event.target.value);
             }}
@@ -106,10 +118,8 @@ export default function Converter() {
             className="p-3 h-[50px] outline-none border-slate-300 rounded-md border-2"
             onChange={async (event) => {
               if (isClicked) {
-                
                 setTo(event.target.value);
                 await handleConversion();
-                
               }
 
               setTo(event.target.value);
