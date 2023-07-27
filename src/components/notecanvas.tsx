@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Editor from "./mce-editor";
 import Sidebar from "./sidebar";
+import { nanoid } from 'nanoid';
+
 
 interface INote {
   _id: string;
@@ -13,14 +15,14 @@ interface INote {
 
 export default function NoteCanvas() {
   const [notes, setNotes] = useState<INote[]>([
-    { _id: "200", title: "Hello There", content: "This is the content" },
+    { _id: nanoid(), title: "Hello There", content: "This is the content" },
     {
-      _id: "201",
+      _id: nanoid(),
       title: "Things are good",
       content: "Things shall be well ijn",
     },
     {
-      _id: "202",
+      _id: nanoid(),
       title: "Things are cool",
       content: "Things shall be well ijn",
     },
@@ -55,7 +57,7 @@ export default function NoteCanvas() {
   };
 
   const handleCreate = () => {
-    const newNote = { _id: "90", title: "", content: "" };
+    const newNote = { _id: nanoid(), title: "", content: "" };
 
     const filledNotes = [...notes, newNote];
 
