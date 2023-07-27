@@ -12,8 +12,6 @@ interface INote {
 }
 
 export default function NoteCanvas() {
-
-
   const [notes, setNotes] = useState<INote[]>([
     { _id: "200", title: "Hello There", content: "This is the content" },
     {
@@ -40,30 +38,45 @@ export default function NoteCanvas() {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleContentChange = (id: string, title: string, content: string) => {
+    const note = notes.find((note) => note._id === id);
+    const remainingNotes = notes.filter((note) => note._id !== id);
 
-     const note = notes.find(note => note._id === id)
-     const remainingNotes = notes.filter(note => note._id !== id);
+    const modifiedNote = { ...note, title: title, content: content };
 
+    const newNotes = [...remainingNotes, modifiedNote];
 
-     const modifiedNote = {...note, title: title, content: content};
-
-     const newNotes = [...remainingNotes, modifiedNote];
-
-     setNotes(newNotes as INote[]);
-        
+    setNotes(newNotes as INote[]);
   };
 
-
   const handleDelete = (id: string) => {
+    const remainingNotes = notes.filter((note) => note._id !== id);
 
-     const remainingNotes = notes.filter(note => note._id !== id)
+    setNotes(remainingNotes);
+  };
 
-     setNotes(remainingNotes);
-  }
+  const handleCreate = () => {
+    const newNote = { _id: "90", title: "", content: "" };
+
+    const filledNotes = [...notes, newNote];
+
+    setNotes(filledNotes);
+
+    setCurrentId(newNote._id);
+    setTitle(newNote.title);
+    setContent(newNote.content);
+    setIsEditing(true);
+  };
 
   return (
     <div className="flex px-4 space-x-4">
-      <Sidebar notes={notes} handleClick={handleClick} currentId={currentId} setCurrentId={setCurrentId} handleDelete={handleDelete}/>
+      <Sidebar
+        notes={notes}
+        handleClick={handleClick}
+        currentId={currentId}
+        setCurrentId={setCurrentId}
+        handleDelete={handleDelete}
+        handleCreate={handleCreate}
+      />
 
       <Editor
         currentId={currentId}
