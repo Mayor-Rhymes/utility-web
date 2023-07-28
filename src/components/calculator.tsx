@@ -36,9 +36,9 @@ export default function Calculator() {
   const [screenValue, setScreenValue] = useState("0");
   const [calculatorMode, setCalculatorMode] = useState(CalculatorMode.Standard);
   const screenClassname =
-    "h-[100px] mt-5 max-w-[300px] flex justify-end items-center pr-2 font-bold text-lg bg-white shadow-md rounded-md";
+    "h-[100px] mt-5 max-w-[300px] flex justify-end items-center pr-2 font-bold text-lg bg-white shadow-md rounded-md dark:bg-black";
   const screenClassnameNumIncrease =
-    "h-[100px] mt-5 max-w-[300px] flex justify-end items-center pr-2 font-bold text-sm bg-white shadow-md rounded-md";
+    "h-[100px] mt-5 max-w-[300px] flex justify-end items-center pr-2 font-bold text-sm bg-white shadow-md rounded-md dark:bg-black";
 
   const clearScreen = () => {
     setScreenValue("0");
@@ -146,8 +146,8 @@ export default function Calculator() {
           onClick={() => setCalculatorMode(CalculatorMode.Standard)}
           className={`active:bg-blue-200 p-3 transition-all ${
             calculatorMode === CalculatorMode.Standard
-              ? "bg-blue-200"
-              : "bg-white"
+              ? "bg-blue-200 dark:bg-blue-500 "
+              : "bg-white dark:bg-black"
           }`}
         >
           Standard
@@ -156,8 +156,8 @@ export default function Calculator() {
           onClick={() => setCalculatorMode(CalculatorMode.Scientific)}
           className={`active:bg-blue-200 p-3 transition-all ${
             calculatorMode === CalculatorMode.Scientific
-              ? "bg-blue-200"
-              : "bg-white"
+              ? "bg-blue-200 dark:bg-blue-500 "
+              : "bg-white dark:bg-black"
           }`}
         >
           Scientific
@@ -176,19 +176,19 @@ export default function Calculator() {
       <div className="grid grid-cols-4 gap-2 transition-all">
         <button
           onClick={clearScreen}
-          className="text-center bg-red-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center col-span-2 shadow-md"
+          className="text-center dark:text-black bg-red-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center col-span-2 shadow-md"
         >
           <MdClear />
         </button>
         <button
           onClick={handlePi}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+          className="text-center dark:text-black bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           Pi
         </button>
         <button
           onClick={handleBackspace}
-          className="text-center flex items-center active:shadow-sm active:text-sm px-3 py-3 justify-center bg-slate-100 rounded-md shadow-md"
+          className="text-center dark:text-black flex items-center active:shadow-sm active:text-sm px-3 py-3 justify-center bg-slate-100 rounded-md shadow-md"
         >
           <BsFillBackspaceFill />
         </button>
@@ -199,56 +199,56 @@ export default function Calculator() {
         ))}
         <button
           onClick={handleSignInversion}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+          className="text-center dark:text-black bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           +/-
         </button>
         <button
           onClick={() => handleButtons(0)}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+          className="text-center dark:text-black bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           0
         </button>
         <button
           onClick={() => handleButtons(".")}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+          className="text-center dark:text-black bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           .
         </button>
         <button
           onClick={() => handleButtons("+")}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+          className="text-center dark:text-black bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           +
         </button>
         <button
           onClick={handlePercent}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+          className="text-center dark:text-black bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           %
         </button>
         <button
           onClick={() => handleButtons("^")}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+          className="text-center dark:text-black bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           ^
         </button>
 
         <button
           onClick={handleFactorial}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+          className="text-center dark:text-black bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           !
         </button>
         <button
           onClick={handleLog}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+          className="text-center dark:text-black bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           log
         </button>
         <button
           onClick={handleLogToE}
-          className="text-center bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+          className="text-center dark:text-black bg-slate-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           ln
         </button>
@@ -264,13 +264,13 @@ export default function Calculator() {
 
         <button
           onClick={handleSqrt}
-          className="text-center bg-blue-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
+          className="text-center dark:text-black bg-blue-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md"
         >
           <TbSquareRoot2 />
         </button>
         <button
           onClick={handleEquals}
-          className="text-center bg-green-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md col-span-2"
+          className="text-center dark:text-black bg-green-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center shadow-md col-span-2"
         >
           =
         </button>

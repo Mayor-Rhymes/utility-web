@@ -25,7 +25,7 @@ export default function Sidebar({ notes, handleClick, setCurrentId, handleDelete
       {notes.map((note) => (
         <div
           key={note._id}
-          className="flex justify-between items-center p-3 hover:bg-slate-200 transition-all rounded-md cursor-pointer"
+          className="flex justify-between items-center p-3 hover:bg-slate-200 dark:hover:text-black transition-all rounded-md cursor-pointer"
         >
           <p
             onClick={() => {
