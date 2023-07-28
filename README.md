@@ -29,6 +29,7 @@ Also, this is my second time writing an expressive readme. I hope it is expressi
 * [Tailwind css](https://tailwindcss.com/)
 * [tinymce](https://www.tiny.cloud/)
 * [radix-ui](https://www.radix-ui.com/)
+* [mathjs](https://mathjs.org)
 * [next-themes](https://next-themes-example.vercel.app/)
 
 
