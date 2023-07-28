@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
 import {useState} from 'react';
+import SwitchDemo from './switch';
 
 export default function Navbar() {
 
@@ -20,7 +21,7 @@ export default function Navbar() {
         <li>
           <Link
             href="/"
-            className="hover:bg-slate-300 p-2 hover:rounded-sm transition-all"
+            className="hover:bg-slate-300 dark:hover:text-black p-2 hover:rounded-sm transition-all"
           >
             Home
           </Link>
@@ -28,7 +29,7 @@ export default function Navbar() {
         <li>
           <Link
             href="note"
-            className="hover:bg-slate-300 p-2 hover:rounded-sm transition-all"
+            className="hover:bg-slate-300  dark:hover:text-black p-2 hover:rounded-sm transition-all"
           >
             Note
           </Link>
@@ -36,7 +37,7 @@ export default function Navbar() {
         <li>
           <Link
             href="calculator"
-            className="hover:bg-slate-300 p-2 hover:rounded-sm transition-all"
+            className="hover:bg-slate-300 dark:hover:text-black p-2 hover:rounded-sm transition-all"
           >
             Calculator
           </Link>
@@ -44,7 +45,7 @@ export default function Navbar() {
         <li>
           <Link
             href="/currency-converter"
-            className="hover:bg-slate-300 p-2 hover:rounded-sm transition-all"
+            className="hover:bg-slate-300 dark:hover:text-black p-2 hover:rounded-sm transition-all"
           >
             Currency-Converter
           </Link>
@@ -52,18 +53,21 @@ export default function Navbar() {
         <li>
           <Link
             href=""
-            className="hover:bg-slate-300 p-2 hover:rounded-sm transition-all"
+            className="hover:bg-slate-300 dark:hover:text-black p-2 hover:rounded-sm transition-all"
           >
             Signup/Login
           </Link>
+        </li>
+        <li>
+            <SwitchDemo />
         </li>
       </ul>
 
-      {visible && <ul className="absolute top-12 w-full bg-white flex flex-col space-y-4 lg:hidden">
+      {visible && <ul className="absolute top-12 left-0 w-full bg-white dark:bg-[#121212] flex flex-col space-y-4 lg:hidden">
         <li>
           <Link
             href="/"
-            className="hover:bg-slate-300 p-2 hover:rounded-sm transition-all"
+            className="hover:bg-slate-300 dark:hover:text-black p-2 hover:rounded-sm transition-all"
           >
             Home
           </Link>
@@ -71,7 +75,7 @@ export default function Navbar() {
         <li>
           <Link
             href="note"
-            className="hover:bg-slate-300 p-2 hover:rounded-sm transition-all"
+            className="hover:bg-slate-300 dark:hover:text-black p-2 hover:rounded-sm transition-all"
           >
             Note
           </Link>
@@ -79,7 +83,7 @@ export default function Navbar() {
         <li>
           <Link
             href="calculator"
-            className="hover:bg-slate-300 p-2 hover:rounded-sm transition-all"
+            className="hover:bg-slate-300 dark:hover:text-black p-2 hover:rounded-sm transition-all"
           >
             Calculator
           </Link>
@@ -87,7 +91,7 @@ export default function Navbar() {
         <li>
           <Link
             href="/currency-converter"
-            className="hover:bg-slate-300 p-2 hover:rounded-sm transition-all"
+            className="hover:bg-slate-300 dark:hover:text-black p-2 hover:rounded-sm transition-all"
           >
             Currency-Converter
           </Link>
@@ -95,10 +99,13 @@ export default function Navbar() {
         <li>
           <Link
             href=""
-            className="hover:bg-slate-300 p-2 hover:rounded-sm transition-all"
+            className="hover:bg-slate-300 dark:hover:text-black p-2 hover:rounded-sm transition-all"
           >
             Signup/Login
           </Link>
+        </li>
+        <li>
+            <SwitchDemo />
         </li>
       </ul>}
     </nav>
