@@ -42,7 +42,7 @@ export default function Sidebar({ notes, handleClick, setCurrentId, handleDelete
         </div>
       ))}
       <div className="flex justify-between items-center p-3">
-         <AiFillPlusCircle className="text-lg lg:text-xl cursor-pointer" onClick={handleCreate}/>
+         <AiFillPlusCircle className="text-lg lg:text-xl cursor-pointer hover:text-green-600" onClick={handleCreate}/>
       </div>
     </div>
   );
