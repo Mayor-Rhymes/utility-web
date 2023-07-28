@@ -63,7 +63,7 @@ export default function Navbar() {
         </li>
       </ul>
 
-      {visible && <ul className="absolute top-12 left-0 w-full bg-white dark:bg-[#121212] flex flex-col space-y-4 lg:hidden">
+      {visible && <ul className="absolute top-12 left-0 w-full items-center bg-white dark:bg-[#121212] flex flex-col space-y-4 lg:hidden">
         <li>
           <Link
             href="/"
