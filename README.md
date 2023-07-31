@@ -31,6 +31,7 @@ Also, this is my second time writing an expressive readme. I hope it is expressi
 * [radix-ui](https://www.radix-ui.com/)
 * [mathjs](https://mathjs.org)
 * [next-themes](https://next-themes-example.vercel.app/)
+* [next-auth](https://next-auth.js.org/)
 
 
 
