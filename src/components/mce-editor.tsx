@@ -52,7 +52,7 @@ export default function Editor({
             plugins:
               "lists codesample spellchecker emoticons image anchor inserttable advlist code media wordcount format",
           }}
-          apiKey="8ywv91dv9pg1dxbfhnepnil67wo2yqyy7vxfjuzvcqivii0w"
+          apiKey={process.env.NEXT_PUBLIC_EDITOR_KEY}
           value={content}
           onEditorChange={(newValue, editor) => {
             setContent(newValue);
