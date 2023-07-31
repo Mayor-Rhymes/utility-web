@@ -30,7 +30,7 @@ const CalculatorMode = {
 const MAX_SCREEN_WIDTH = 28;
 
 export default function Calculator() {
-  const buttons = [7, 8, 9, "*", 4, 5, 6, "-", 1, 2, 3, "/"];
+  const buttons = [7, 8, 9, "x", 4, 5, 6, "-", 1, 2, 3, "/"];
   const trigFunctions = ["sin", "cos", "tan", "asin"];
   const [screenValue, setScreenValue] = useState("0");
   const [calculatorMode, setCalculatorMode] = useState(CalculatorMode.Standard);
@@ -62,7 +62,12 @@ export default function Calculator() {
             : prevState + numberToString
         );
       } else if (typeof value === "string" || value === ".") {
-        setScreenValue(screenValue + value);
+        if(value === "x"){
+          setScreenValue(screenValue + "*");
+        } else {
+          setScreenValue(screenValue + value);
+        }
+        
       }
     }
   };
@@ -179,7 +184,7 @@ export default function Calculator() {
           onClick={clearScreen}
           className="text-center dark:text-black bg-red-100 active:shadow-sm active:text-sm px-3 py-3 rounded-md flex items-center justify-center col-span-2 shadow-md"
         >
-          <MdClear />
+          Clear
         </button>
         <button
           onClick={handlePi}
