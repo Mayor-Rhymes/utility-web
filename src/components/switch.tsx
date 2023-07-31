@@ -5,7 +5,7 @@ import {useTheme} from 'next-themes';
 
 const SwitchDemo = () => {
 
-  const [mounted, setMounted] = useState();
+  const [mounted, setMounted] = useState<null | boolean>(null);
   const {theme, setTheme} = useTheme();
 
 

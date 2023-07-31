@@ -10,7 +10,7 @@ const encodedCredentials = btoa(
   `${process.env.NEXT_PUBLIC_USERNAME}:${process.env.NEXT_PUBLIC_PASSWORD}`
 );
 
-const fetcher = async (url) => {
+const fetcher = async (url: string) => {
   const request = await fetch(`${url}`, {
     headers: {
       "Content-Type": "application/json",
@@ -71,12 +71,12 @@ export default function Converter() {
                   setAmount(1);
                   await handleConversion();
                 } else {
-                  setAmount(event.target.value);
+                  setAmount(Number(event.target.value));
                   await handleConversion();
                 }
               }
 
-              setAmount(event.target.value);
+              setAmount(Number(event.target.value));
             }}
             type="number"
             name="amount"
@@ -103,7 +103,7 @@ export default function Converter() {
               setFrom(event.target.value);
             }}
           >
-            {data?.currencies.map((datum) => (
+            {data?.currencies.map((datum: any) => (
               <option key={datum.iso} value={datum.iso}>
                 {datum.iso}
               </option>
@@ -125,7 +125,7 @@ export default function Converter() {
               setTo(event.target.value);
             }}
           >
-            {data?.currencies.map((datum) => (
+            {data?.currencies.map((datum: any) => (
               <option key={datum.iso} value={datum.iso}>
                 {datum.iso}
               </option>
