@@ -17,10 +17,9 @@ import {
   cos,
   tan,
   unit,
-  ceil,
-  round,
   asin,
 } from "mathjs";
+
 import CalcButton from "./calculatorbutton";
 
 const CalculatorMode = {
@@ -86,11 +85,11 @@ export default function Calculator() {
   };
 
   const handleLog = () => {
-    setScreenValue(log(screenValue, 10));
+    setScreenValue(log(Number(screenValue), 10).toString());
   };
 
   const handleLogToE = () => {
-    setScreenValue(log(screenValue, e));
+    setScreenValue(log(Number(screenValue), e).toString());
   };
 
   const handlePercent = () => {
@@ -99,10 +98,10 @@ export default function Calculator() {
   };
 
   const handleFactorial = () => {
-    setScreenValue(factorial(screenValue));
+    setScreenValue(factorial(Number(screenValue)).toString());
   };
 
-  const calculateTrigValue = (value: string) => {
+  const calculateTrigValue = (value: string | number) => {
     switch (value) {
       case "sin":
         setScreenValue(sin(unit(Number(screenValue), "deg")).toString());
@@ -117,13 +116,13 @@ export default function Calculator() {
         break;
 
       case "asin":
-        setScreenValue(asin(unit(Number(screenValue), "deg")).toString());
+        setScreenValue(asin(Number(unit(Number(screenValue), "deg"))).toString());
         break;
     }
   };
 
   const handleSqrt = () => {
-    setScreenValue(sqrt(screenValue));
+    setScreenValue(sqrt(Number(screenValue)).toString());
   };
 
   const handleEquals = () => {
