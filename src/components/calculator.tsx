@@ -101,7 +101,7 @@ export default function Calculator() {
     setScreenValue(factorial(Number(screenValue)).toString());
   };
 
-  const calculateTrigValue = (value: string) => {
+  const calculateTrigValue = (value: string | number) => {
     switch (value) {
       case "sin":
         setScreenValue(sin(unit(Number(screenValue), "deg")).toString());
