@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "../components/navbar";
 import { ThemeProvider } from "../components/themeprovider";
-import { switchThemeDuration } from "./constants";
+import NextAuthProvider from "@/components/nextauthprovider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navbar />
-          {children}
+          <NextAuthProvider>
+            <Navbar />
+            {children}
+          </NextAuthProvider>
         </ThemeProvider>
       </body>
     </html>
