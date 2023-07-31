@@ -116,7 +116,9 @@ export default function Calculator() {
         break;
 
       case "asin":
-        setScreenValue(asin(Number(unit(Number(screenValue), "deg"))).toString());
+        setScreenValue(
+          asin(Number(unit(Number(screenValue), "deg"))).toString()
+        );
         break;
     }
   };
@@ -134,7 +136,7 @@ export default function Calculator() {
       screenValue.includes("^")
     ) {
       const result = evaluate(screenValue);
-      setScreenValue(result);
+      setScreenValue(result.toString());
     }
   };
 
