@@ -77,7 +77,15 @@ export default function Converter() {
                 }
               }
 
-              setAmount(Number(event.target.value));
+              if(isNaN(amount)){
+                setAmount(1);
+              } else {
+                  
+                setAmount(Number(event.target.value));
+
+              }
+
+              
             }}
             type="text"
             name="amount"
