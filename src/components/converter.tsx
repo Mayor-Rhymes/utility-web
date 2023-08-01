@@ -3,6 +3,7 @@
 import { useState } from "react";
 import useSWR from "swr";
 import { ToastContainer, toast } from "react-toastify";
+import { handleMoneyPresentation } from "@/app/libs/stringManipulation/moneyManipulator";
 
 const URL = process.env.NEXT_PUBLIC_URL;
 
@@ -67,7 +68,7 @@ export default function Converter() {
             value={amount}
             onChange={async (event) => {
               if (isClicked) {
-                if (amount <= 0) {
+                if (isNaN(amount)) {
                   setAmount(1);
                   await handleConversion();
                 } else {
@@ -78,7 +79,7 @@ export default function Converter() {
 
               setAmount(Number(event.target.value));
             }}
-            type="number"
+            type="text"
             name="amount"
             min={1}
             className="h-[50px] outline-none border-slate-300 rounded-md border-2 p-3"
@@ -151,7 +152,9 @@ export default function Converter() {
         <h3>
           {from} <span className="text-2xl font-semibold">{amount}</span> is
           equal to {to}{" "}
-          <span className="text-2xl font-semibold">{result.toFixed(3)}</span>
+          <span className="text-2xl font-semibold">
+            {handleMoneyPresentation(result.toFixed(3))}
+          </span>
         </h3>
       )}
     </div>
