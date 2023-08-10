@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { ToastContainer, toast } from "react-toastify";
 import { handleMoneyPresentation } from "@/app/libs/stringManipulation/moneyManipulator";
@@ -28,11 +28,14 @@ export default function Converter() {
     if (amount && from && to) {
       try {
         const result = await fetcher(
-          `${URL}/v1/convert_from/?from=${from}&to=${to}&amount=${amount}`
+          `https://api.freecurrencyapi.com/v1/latest?apikey=${process.env.NEXT_PUBLIC_CURRENCY_CONVERTER_API_KEY}&currencies=${to}&base_currency=${from}`
         );
 
         if (result) {
-          setResult(result.to[0].mid);
+          
+          const value = result.data[to];
+          setResult(value * amount)
+          
         } else {
           toast.error("The api is malfunctioning", {
             theme: "light",
@@ -45,19 +48,49 @@ export default function Converter() {
           closeOnClick: true,
         });
       }
+    } else {
+      toast.error("Please add all credentials", {
+        theme: "light",
+        closeOnClick: true,
+      });
     }
   };
 
-  const { data, isLoading, error } = useSWR(
-    `${URL}/v1/currencies?obsolete=false`,
+  const {
+    data: currencies,
+    isLoading,
+    error,
+  } = useSWR(
+    `https://api.freecurrencyapi.com/v1/currencies?apikey=${process.env.NEXT_PUBLIC_CURRENCY_CONVERTER_API_KEY}`,
     fetcher
   );
 
   const [amount, setAmount] = useState(1);
-  const [from, setFrom] = useState("NGN");
-  const [to, setTo] = useState("USD");
+  const [from, setFrom] = useState<any>("USD");
+  const [to, setTo] = useState<any>("GBP");
   const [result, setResult] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
+  const [currencyList, setCurrencyList] = useState(
+    currencies ? Object.keys(currencies?.data) : []
+  );
+
+  useEffect(() => {
+
+      if(currencies){
+         setCurrencyList(Object.keys(currencies?.data))
+      }
+  }, [currencies])
+
+  
+
+  if (!currencies) {
+    return (
+      <h3 className="text-center text-xl">
+        The api is currently unavailable. The currency converter I used is not
+        free and I have no money.{" "}
+      </h3>
+    );
+  }
 
   return (
     <div className="max-w-[70%] py-5 lg:h-[400px] px-5 rounded-xl flex flex-col mt-4 space-y-4 justify-center shadow-2xl mx-auto">
@@ -77,15 +110,11 @@ export default function Converter() {
                 }
               }
 
-              if(isNaN(amount)){
+              if (isNaN(amount)) {
                 setAmount(1);
               } else {
-                  
                 setAmount(Number(event.target.value));
-
               }
-
-              
             }}
             type="text"
             name="amount"
@@ -112,9 +141,9 @@ export default function Converter() {
               setFrom(event.target.value);
             }}
           >
-            {data?.currencies.map((datum: any) => (
-              <option key={datum.iso} value={datum.iso}>
-                {datum.iso}
+            {currencyList.map((datum: any) => (
+              <option key={datum} value={datum}>
+                {datum}
               </option>
             ))}
           </select>
@@ -134,9 +163,9 @@ export default function Converter() {
               setTo(event.target.value);
             }}
           >
-            {data?.currencies.map((datum: any) => (
-              <option key={datum.iso} value={datum.iso}>
-                {datum.iso}
+            {currencyList.map((datum: any) => (
+              <option key={datum} value={datum}>
+                {datum}
               </option>
             ))}
           </select>
@@ -168,3 +197,4 @@ export default function Converter() {
     </div>
   );
 }
+

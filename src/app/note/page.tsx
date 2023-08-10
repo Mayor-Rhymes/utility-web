@@ -1,8 +1,8 @@
-"use client";
+
 
 import NoteCanvas from "@/components/notecanvas";
-import useState from "react";
-import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/libs/auth/authOptions";
 
 interface INote {
   _id: string;
@@ -11,8 +11,8 @@ interface INote {
   // authorId: string;
 }
 
-export default function Note() {
-  const { data: session, status } = useSession();
+export default async function Note() {
+  const session = await getServerSession(authOptions)
 
   if (!session) {
     return (
